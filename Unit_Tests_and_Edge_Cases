@@ -4,7 +4,10 @@ my_txt = "An investment in knowledge pays the best interest."
 
 
 def LetterCompiler(txt):
-    result = re.findall(r'([a-c]).', txt)
+    stxt = ""
+    for char in txt:
+        stxt+= char+" "
+    result = re.findall(r'([a-c]).', stxt)
     return result
 
 
@@ -26,10 +29,20 @@ class TestCompiler2(unittest.TestCase):
         testcase = "A b c d e f g h i j k l m n o q r s t u v w x y z"
         expected = ['b', 'c']
         self.assertEqual(LetterCompiler(testcase), expected)
-
+        
     def test_empty(self):
+        testcase = ""
+        expected = []
+        self.assertEqual(LetterCompiler(testcase), expected)
+
+    def test_none(self):
         testcase = "l "
         expected = []
+        self.assertEqual(LetterCompiler(testcase), expected)
+
+    def test_number(self):
+        testcase = "<13a18 b7 c?def"
+        expected = ['a', 'b', 'c']
         self.assertEqual(LetterCompiler(testcase), expected)
 
     def test_number(self):
